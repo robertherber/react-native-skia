@@ -33,7 +33,11 @@ public:
       jsi::Runtime *runtime, RCTBridge *bridge,
       std::shared_ptr<facebook::react::CallInvoker> jsCallInvoker)
       : RNSkPlatformContext(runtime, jsCallInvoker,
+                            #if TARGET_OS_VISION
+                            3.0) {
+                            #else
                             [[UIScreen mainScreen] scale]) {
+                            #endif
 
     // We need to make sure we invalidate when modules are freed
     CFNotificationCenterAddObserver(
